@@ -1,71 +1,90 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="id-ID" class="theme light EHoceA">
+<html lang="id">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Kuis Jaringan Komputer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="./ganti_files/a402f2dd19419843.ltr.css">
-    
-    <style>
-        /* CSS Tombol Keluar Pojok Kanan Atas */
-        .btn-exit-custom {
-            position: fixed; /* Membuat posisi tetap saat di-scroll */
-            top: 15px;       /* Jarak dari atas */
-            right: 15px;     /* Jarak dari kanan */
-            background-color: #ff4d4d !important; 
-            color: white !important;
-            border: 2px solid white; /* Tambahan border agar lebih terlihat */
-            border-radius: 50px;
-            padding: 8px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-            z-index: 9999;    /* Memastikan tombol di atas Iframe */
-            font-family: sans-serif;
-            font-size: 14px;
-            transition: transform 0.2s, background 0.3s;
-        }
+<meta charset="UTF-8">
+<title>Kuis Jaringan Komputer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .btn-exit-custom:hover {
-            background-color: #cc0000 !important;
-            transform: scale(1.05); /* Efek membesar sedikit saat disentuh */
-        }
+<style>
+/* Reset */
+body, html{
+margin:0;
+padding:0;
+height:100%;
+overflow:hidden;
+font-family: Arial, Helvetica, sans-serif;
+}
 
-        /* Menghilangkan margin default agar Iframe penuh */
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-    </style>
+/* Tombol keluar */
+.btn-exit-custom{
+position:fixed;
+top:15px;
+right:15px;
+background:#ff4d4d;
+color:white;
+border:none;
+border-radius:50px;
+padding:10px 22px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0px 4px 10px rgba(0,0,0,0.3);
+z-index:9999;
+transition:0.2s;
+}
+
+.btn-exit-custom:hover{
+background:#cc0000;
+transform:scale(1.05);
+}
+
+/* iframe fullscreen */
+.quiz-frame{
+width:100vw;
+height:100vh;
+border:none;
+}
+</style>
 </head>
 
 <body>
-    <button onclick="closeWindow()" class="btn-exit-custom">
-        ✕ Keluar Kuis
-    </button>
 
-    <div id="root">
-        <main class="_8OlyIw">
-            <div class="_4KoDHA">
-                <div style="height: 100vh; width: 100vw;">
-                    <iframe title="Kuis Jaringan" src="./ganti_files/index.html" style="width:100%; height:100%; border:0;" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" allow=""></iframe>
-                </div>
-            </div>
-        </main>
-    </div>
+<button onclick="exitQuiz()" class="btn-exit-custom">
+✕ Keluar Kuis
+</button>
 
-    <script>
-        function closeWindow() {
-            // Mencoba menutup tab
-            window.close();
+<!-- iframe memanggil file kuis -->
+<iframe 
+class="quiz-frame"
+title="Kuis Jaringan Komputer"
+src="ganti2.html"
+sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+</iframe>
 
-            // Jika gagal (karena proteksi browser), munculkan konfirmasi
-            setTimeout(function() {
-                if (!window.closed) {
-                    if (confirm("Gagal menutup otomatis. Ingin kembali ke halaman sebelumnya atau menutup tab ini secara manual?")) {
-                        // Jika dalam aplikasi, arahkan ke blank atau link spesifik
-                        window.location.href = "about:blank"; 
-                    }
-                }
-            }, 300);
-        }
-    </script>
+<script>
+function exitQuiz(){
+
+// coba tutup tab
+window.close();
+
+// fallback jika browser blokir
+setTimeout(function(){
+
+if(!window.closed){
+
+let keluar = confirm(
+"Kuis akan ditutup.\nKlik OK untuk keluar dari halaman."
+);
+
+if(keluar){
+window.location.href = "about:blank";
+}
+
+}
+
+},300);
+
+}
+</script>
+
 </body>
 </html>
